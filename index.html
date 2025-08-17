@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Virtual Amoeba</title>
   <style>
-    * {
+    body, html {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
-    body, html {
-      height: 100%;
-      font-family: Arial, sans-serif;
-    }
-    .video-container {
+    #video-section {
       position: relative;
       width: 100%;
       height: 100vh;
@@ -24,65 +23,68 @@
       height: 100%;
       border: none;
     }
-    .contact-section {
+    #contact {
       display: none;
-      background: url('https://i.imgur.com/lrhJtht.jpg') center/cover no-repeat;
+      background: url('your-ocean-image.jpg') no-repeat center center/cover;
       padding: 60px 20px;
       text-align: center;
-      color: white;
     }
-    .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 30px;
+    #contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
-    .contact-icon {
-      font-size: 32px;
+    .contact-link {
+      display: inline-block;
+      margin: 10px;
+      font-size: 1.2rem;
+      color: #fff;
       text-decoration: none;
-      color: white;
-      transition: transform 0.2s ease;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
     }
-    .contact-icon:hover {
-      transform: scale(1.2);
+    .contact-link:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
-  <div class="video-container">
-    <iframe id="promoVideo" src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <div id="video-section">
+    <iframe id="hero-video" 
+      src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
   </div>
 
-  <div class="contact-section" id="contact">
-    <h2>Let's Connect</h2>
-    <p>Choose your path to connect with Virtual Amoeba</p>
-    <div class="contact-icons">
-      <a class="contact-icon" href="https://calendly.com/virtualamoeba" target="_blank">📅</a>
-      <a class="contact-icon" href="https://pinterest.com/virtualamoeba" target="_blank">📌</a>
-      <a class="contact-icon" href="mailto:hello@virtualamoeba.com">✉️</a>
-    </div>
+  <div id="contact">
+    <h2>Let's Create Something Beautiful</h2>
+    <a class="contact-link" href="https://calendly.com/virtualamoeba/15min" target="_blank">Book Now</a>
+    <a class="contact-link" href="mailto:design@virtualamoeba.com">Email Us</a>
   </div>
 
   <script>
-    function showContact() {
-      document.getElementById('contact').style.display = 'block';
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-
     function onYouTubeIframeAPIReady() {
-      new YT.Player('promoVideo', {
+      const player = new YT.Player('hero-video', {
         events: {
-          'onStateChange': function (e) {
-            if (e.data === YT.PlayerState.ENDED) showContact();
+          'onStateChange': function (event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              document.getElementById('video-section').style.display = 'none';
+              document.getElementById('contact').style.display = 'block';
+              window.scrollTo(0, 0);
+            }
           }
         }
       });
     }
 
+    // Load YouTube Iframe API
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    document.head.appendChild(tag);
   </script>
+
 </body>
 </html>
