@@ -5,78 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
-      background: #000;
+      background-color: #000;
+      font-family: Arial, sans-serif;
       color: white;
-      font-family: sans-serif;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .video-container {
-      position: fixed;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      width: 100%;
+      max-width: 960px;
+    }
+    .video-container iframe {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      border: none;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
+    .contact-section {
+      margin-top: 40px;
+      text-align: center;
     }
-    .buttons {
-      display: none;
-      height: 100vh;
-      width: 100vw;
-      background: black;
-      color: white;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .btn {
-      margin: 10px;
-      padding: 12px 24px;
+    .contact-section button {
+      background: none;
       border: 2px solid white;
-      background: transparent;
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 16px;
       color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 30px;
-      transition: 0.3s ease;
+      border-radius: 25px;
+      cursor: pointer;
     }
-    .btn:hover {
-      background: white;
+    .contact-section button:hover {
+      background-color: white;
       color: black;
     }
   </style>
 </head>
 <body>
-  <div class="video-container" id="video">
+
+  <div class="video-container">
     <iframe
-      id="yt"
-      src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&controls=1&rel=0&modestbranding=1&showinfo=0&playsinline=1&mute=1"
-      frameborder="0"
+      src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&mute=0&controls=1&rel=0&showinfo=1"
+      title="Virtual Amoeba"
       allow="autoplay; encrypted-media"
       allowfullscreen
     ></iframe>
   </div>
 
-  <div class="buttons" id="endScreen">
+  <div class="contact-section">
     <h2>Contact Us</h2>
-    <a href="https://calendly.com/virtualamoebastudio/30min" class="btn" target="_blank">Book Free Consultation</a>
-    <a href="https://www.pinterest.com/virtualamoebastudio/" class="btn" target="_blank">View Portfolio</a>
+    <button onclick="window.location.href='https://virtualamoeba.com/consultation'">Book Free Consultation</button>
+    <button onclick="window.location.href='https://virtualamoeba.com/portfolio'">View Portfolio</button>
   </div>
 
-  <script>
-    setTimeout(() => {
-      document.getElementById('video').style.display = 'none';
-      document.getElementById('endScreen').style.display = 'flex';
-    }, 7000); // Adjust this to your video length if needed
-  </script>
 </body>
 </html>
