@@ -2,117 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #000;
-      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f2f2;
     }
 
-    .video-container {
+    .video-wrapper {
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
+      width: 100%;
+      height: 100vh;
     }
 
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
 
-    #contact {
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      background: url('https://raw.githubusercontent.com/yourusername/yourrepo/main/Screenshot%202025-08-17%20at%204.24.45%E2%80%AFpm.jpeg') center/cover no-repeat;
-      padding: 80px 20px;
-      text-align: center;
+    .contact-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      background-color: #fff;
     }
 
-    #contact.show {
-      opacity: 1;
-    }
-
-    #contact h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-      color: #fff;
-    }
-
-    #contact p {
-      font-size: 1.1em;
+    .contact-box {
+      width: 100%;
       max-width: 600px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
-      color: #fff;
-    }
-
-    #contact a.button {
-      display: inline-block;
-      padding: 12px 28px;
       background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 20px;
       color: #222;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
+      font-size: 24px;
     }
 
-    #contact a.button:hover {
-      background: #ff6f61;
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      background-color: #f9f9f9;
+    }
+
+    .form-group textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .form-group button {
+      background-color: #1e90ff;
       color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    @media (max-width: 768px) {
-      #contact h2 {
-        font-size: 1.8em;
-      }
+    .form-group button:hover {
+      background-color: #006fd6;
+    }
 
-      #contact p {
-        font-size: 1em;
-      }
-
-      #contact a.button {
-        padding: 10px 20px;
-        font-size: 0.9em;
+    @media (max-width: 600px) {
+      .contact-box {
+        padding: 25px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Video Section -->
-  <div class="video-container">
-    <iframe id="promoVideo" src="https://www.youtube.com/embed/RtLulNMAA3s?autoplay=1&controls=1&mute=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div class="video-wrapper">
+    <iframe id="youtubeVideo" src="https://www.youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1&autoplay=1&controls=1" allowfullscreen></iframe>
   </div>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Let’s Build Something Brilliant Together</h2>
-    <p>Ready to create stunning visuals or elevate your brand? Reach out for a free consultation or browse the portfolio.</p>
-    <a class="button" href="https://calendly.com/virtualamoeba">Book Free Consultation</a>
-    <a class="button" href="https://www.pinterest.com/virtualamoeba/">View Pinterest Portfolio</a>
-    <p style="margin-top: 40px;">📧 <a href="mailto:virtualamoebastudio@gmail.com" style="color: white; text-decoration: underline;">virtualamoebastudio@gmail.com</a></p>
-  </section>
+  <div class="contact-container" id="contactSection">
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script>
-    const contactSection = document.getElementById('contact');
-
-    // Auto-show Contact section after 3 seconds
-    setTimeout(() => {
-      contactSection.classList.add('show');
-    }, 3000);
+    // Fixes mobile rendering & triggers contact section faster
+    function onYouTubeIframeAPIReady() {
+      new YT.Player('youtubeVideo', {
+        events: {
+          'onStateChange': function (event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              document.querySelector('.video-wrapper').style.display = 'none';
+              document.getElementById('contactSection').style.display = 'flex';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }
+        }
+      });
+    }
   </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 
 </body>
 </html>
