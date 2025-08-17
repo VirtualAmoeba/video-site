@@ -5,71 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html {
+    html, body {
+      margin: 0;
+      padding: 0;
       height: 100%;
-      background: #000;
-      color: white;
-      font-family: sans-serif;
-      overflow: hidden;
+      background-color: #000;
     }
     .video-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
       height: 100%;
+      width: 100%;
+      overflow: hidden;
     }
     iframe {
       width: 100%;
       height: 100%;
-    }
-    .buttons {
-      display: none;
-      height: 100vh;
-      width: 100vw;
-      background: #111;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .btn {
-      padding: 12px 24px;
-      border: 2px solid white;
-      background: transparent;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 30px;
-      transition: 0.3s ease;
-    }
-    .btn:hover {
-      background: white;
-      color: black;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <div class="video-container" id="video">
-    <iframe id="yt" src="src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0&playsinline=1" 
-      frameborder="0" allowfullscreen allow="autoplay"></iframe>
+  <div class="video-container">
+    <iframe 
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+      title="Virtual Amoeba Video"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
   </div>
-
-  <div class="buttons" id="endScreen">
-    <h2>Contact Us</h2>
-    <a href="https://calendly.com/virtualamoebastudio/30min" class="btn" target="_blank">Book Free Consultation</a>
-    <a href="https://www.pinterest.com/virtualamoebastudio/" class="btn" target="_blank">View Portfolio</a>
-  </div>
-
-  <script>
-    setTimeout(() => {
-      document.getElementById('video').style.display = 'none';
-      document.getElementById('endScreen').style.display = 'flex';
-    }, 7000); // Adjust if video length changes
-  </script>
 </body>
 </html>
