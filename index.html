@@ -5,60 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
       height: 100%;
-      background-color: #000;
+      background: #000;
+      color: white;
+      font-family: sans-serif;
+      overflow: hidden;
     }
     .video-container {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
     }
     .buttons {
       display: none;
-      width: 100vw;
       height: 100vh;
-      background: #111;
-      color: #fff;
-      display: flex;
+      width: 100vw;
+      background: black;
+      color: white;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      gap: 24px;
-      text-align: center;
-      padding: 0 20px;
-      font-family: sans-serif;
+      align-items: center;
     }
     .btn {
+      margin: 10px;
       padding: 12px 24px;
-      border: 2px solid #fff;
+      border: 2px solid white;
       background: transparent;
-      color: #fff;
+      color: white;
       font-weight: bold;
       text-decoration: none;
       border-radius: 30px;
-      transition: background 0.3s, color 0.3s;
+      transition: 0.3s ease;
     }
     .btn:hover {
-      background: #fff;
-      color: #000;
+      background: white;
+      color: black;
     }
   </style>
 </head>
 <body>
   <div class="video-container" id="video">
-    <iframe 
-      src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&playsinline=1"
-      title="Virtual Amoeba Video"
+    <iframe
+      id="yt"
+      src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&controls=1&rel=0&modestbranding=1&showinfo=0&playsinline=1&mute=1"
       frameborder="0"
       allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+      allowfullscreen
+    ></iframe>
   </div>
 
   <div class="buttons" id="endScreen">
@@ -71,7 +76,7 @@
     setTimeout(() => {
       document.getElementById('video').style.display = 'none';
       document.getElementById('endScreen').style.display = 'flex';
-    }, 7000); // Adjust this delay (in ms) to the length of your video
+    }, 7000); // Adjust this to your video length if needed
   </script>
 </body>
 </html>
