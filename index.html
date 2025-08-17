@@ -2,133 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Virtual Amoeba</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background-color: #000;
+      color: #fff;
     }
 
-    #video-container {
+    .video-container {
       position: relative;
-      width: 100vw;
-      height: 100vh;
+      padding-bottom: 56.25%;
+      height: 0;
       overflow: hidden;
     }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    .video-container iframe {
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
-    #contact-section {
-      display: none;
-      background: url('https://virtualamoeba.github.io/video-site/Island%20Virtual%20Contact%20Us%20Page.jpg') no-repeat center center / cover;
-      color: white;
+    #contact {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background: url('https://raw.githubusercontent.com/yourusername/yourrepo/main/Screenshot%202025-08-17%20at%204.24.45%E2%80%AFpm.jpeg') center/cover no-repeat;
+      padding: 80px 20px;
       text-align: center;
-      padding: 10vh 20px;
-      min-height: 100vh;
-      box-sizing: border-box;
     }
 
-    #contact-section h2 {
-      font-size: 34px;
-      margin-bottom: 30px;
-      text-shadow: 0px 2px 6px rgba(0,0,0,0.6);
+    #contact.show {
+      opacity: 1;
     }
 
-    .button-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-bottom: 40px;
+    #contact h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      color: #fff;
     }
 
-    .button-container a {
-      background: rgba(255, 255, 255, 0.9);
-      color: #000;
-      padding: 16px 34px;
-      border-radius: 40px;
+    #contact p {
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #fff;
+    }
+
+    #contact a.button {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #ffffff;
+      color: #222;
+      border-radius: 100px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
+      margin: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
     }
 
-    .button-container a:hover {
-      background: #fff;
-      transform: scale(1.05);
-    }
-
-    .contact-email {
-      font-size: 18px;
-      margin-top: 10px;
-      text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .contact-email a {
-      color: #fff;
-      text-decoration: underline;
+    #contact a.button:hover {
+      background: #ff6f61;
+      color: white;
     }
 
     @media (max-width: 768px) {
-      #contact-section {
-        padding: 80px 20px;
+      #contact h2 {
+        font-size: 1.8em;
       }
 
-      #contact-section h2 {
-        font-size: 26px;
+      #contact p {
+        font-size: 1em;
       }
 
-      .button-container a {
-        width: 90%;
-        max-width: 300px;
-        font-size: 15px;
-      }
-
-      .contact-email {
-        font-size: 15px;
+      #contact a.button {
+        padding: 10px 20px;
+        font-size: 0.9em;
       }
     }
   </style>
 </head>
 <body>
 
-  <div id="video-container">
-    <iframe 
-      src="https://www.youtube-nocookie.com/embed/eAuhLk4h6TA?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1"
-      title="Virtual Amoeba Studio"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+  <!-- Video Section -->
+  <div class="video-container">
+    <iframe id="promoVideo" src="https://www.youtube.com/embed/RtLulNMAA3s?autoplay=1&controls=1&mute=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 
-  <div id="contact-section">
+  <!-- Contact Section -->
+  <section id="contact">
     <h2>Let’s Build Something Brilliant Together</h2>
-    <div class="button-container">
-      <a href="https://calendly.com/virtualamoebastudio/30min" target="_blank">Book Free Consultation</a>
-      <a href="https://www.pinterest.com/virtualamoebastudio/" target="_blank">View Pinterest Portfolio</a>
-    </div>
-    <div class="contact-email">
-      📩 <a href="mailto:virtualamoebastudio@gmail.com">virtualamoebastudio@gmail.com</a>
-    </div>
-  </div>
+    <p>Ready to create stunning visuals or elevate your brand? Reach out for a free consultation or browse the portfolio.</p>
+    <a class="button" href="https://calendly.com/virtualamoeba">Book Free Consultation</a>
+    <a class="button" href="https://www.pinterest.com/virtualamoeba/">View Pinterest Portfolio</a>
+    <p style="margin-top: 40px;">📧 <a href="mailto:virtualamoebastudio@gmail.com" style="color: white; text-decoration: underline;">virtualamoebastudio@gmail.com</a></p>
+  </section>
 
   <script>
+    const contactSection = document.getElementById('contact');
+
+    // Auto-show Contact section after 3 seconds
     setTimeout(() => {
-      document.getElementById('video-container').style.display = 'none';
-      document.getElementById('contact-section').style.display = 'block';
-    }, 65000); // Adjust if needed
+      contactSection.classList.add('show');
+    }, 3000);
   </script>
 
 </body>
