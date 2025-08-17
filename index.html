@@ -15,25 +15,63 @@
       position: absolute;
       top: 0;
       left: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
       overflow: hidden;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    .buttons {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+      padding: 0 20px;
+      font-family: sans-serif;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn:hover {
+      background: #fff;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="video-container">
+  <div class="video-container" id="video">
     <iframe 
-      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+      src="https://www.youtube.com/embed/hJTmp84yu6E?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&playsinline=1"
       title="Virtual Amoeba Video"
+      frameborder="0"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
   </div>
+
+  <div class="buttons" id="endScreen">
+    <h2>Contact Us</h2>
+    <a href="https://calendly.com/virtualamoebastudio/30min" class="btn" target="_blank">Book Free Consultation</a>
+    <a href="https://www.pinterest.com/virtualamoebastudio/" class="btn" target="_blank">View Portfolio</a>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('video').style.display = 'none';
+      document.getElementById('endScreen').style.display = 'flex';
+    }, 7000); // Adjust this delay (in ms) to the length of your video
+  </script>
 </body>
 </html>
