@@ -2,48 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Virtual Amoeba | Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Amoeba</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; overflow-x: hidden; }
-    #video-container { position: relative; width: 100%; height: 100vh; }
-    iframe.video {
-      position: absolute;
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
+    #video-container, #contact-container {
+      width: 100%;
+      height: 100vh;
+    }
+    iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
-    #contact-section {
-      width: 100%;
-      height: 100vh;
-      border: none;
-    }
-    @media screen and (max-width: 768px) {
-      #contact-section {
-        height: 120vh;
-      }
+    #contact-container {
+      display: none;
     }
   </style>
 </head>
 <body>
-
-  <!-- Full-screen autoplay video -->
   <div id="video-container">
-    <iframe class="video"
-      src="https://www.youtube.com/embed/UpNa_GUuzgQ?autoplay=1&mute=1&controls=1&loop=1&playlist=UpNa_GUuzgQ"
+    <iframe
+      id="video"
+      src="https://www.youtube.com/embed/jmIV6dRHAzA?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
       allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+      allowfullscreen
+    ></iframe>
   </div>
 
-  <!-- Canva Contact Page -->
-  <iframe
-    id="contact-section"
-    src="https://virtualamoebacontact.my.canva.site/"
-    title="Virtual Amoeba Contact Page"
-    loading="lazy">
-  </iframe>
+  <div id="contact-container">
+    <iframe src="https://virtualamoebacontact.my.canva.site/"></iframe>
+  </div>
 
+  <script>
+    // Wait for YouTube API to be ready
+    function onYouTubeIframeAPIReady() {
+      const player = new YT.Player('video', {
+        events: {
+          onStateChange: function(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              document.getElementById('video-container').style.display = 'none';
+              document.getElementById('contact-container').style.display = 'block';
+            }
+          }
+        }
+      });
+    }
+
+    // Load YouTube API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  </script>
 </body>
 </html>
