@@ -5,35 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background-color: #fff;
     }
 
     .video-container {
-      position: relative;
       width: 100%;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
     .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
+      border: none;
     }
 
     .contact-section {
-      background-image: url('your-ocean-background.jpg'); /* replace with actual image path */
+      display: none;
+      background-image: url('your-ocean-background.jpg'); /* Replace this path */
       background-size: cover;
       background-position: center;
+      color: white;
       padding: 100px 20px;
       text-align: center;
-      color: white;
     }
 
     .contact-section h1 {
@@ -81,19 +80,18 @@
 </head>
 <body>
 
-  <!-- Fullscreen Autoplay Video -->
+  <!-- Video Embed -->
   <div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=eAuhLk4h6TA"
+    <iframe id="video"
+      src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&enablejsapi=1"
       title="Virtual Amoeba"
-      frameborder="0"
       allow="autoplay; encrypted-media"
       allowfullscreen
     ></iframe>
   </div>
 
-  <!-- Contact Section -->
-  <section class="contact-section">
+  <!-- Contact Us Section -->
+  <section id="contact" class="contact-section">
     <h1>Ready to Build Your Brand?</h1>
     <div class="button-group">
       <a href="https://calendly.com/virtualamoeba/15min" target="_blank">Free Consultation</a>
@@ -101,6 +99,35 @@
       <a href="mailto:VirtualAmoebaStudio@gmail.com">VirtualAmoebaStudio@gmail.com</a>
     </div>
   </section>
+
+  <!-- YouTube API -->
+  <script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('video', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        document.querySelector('.video-container').style.display = 'none';
+        document.getElementById('contact').style.display = 'block';
+      }
+    }
+  </script>
 
 </body>
 </html>
