@@ -2,68 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virtual Amoeba</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Amoeba Intro</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background-color: black;
       height: 100%;
-      overflow: hidden;
+      background-color: black;
     }
-    .video-container {
-      position: fixed;
+
+    #player {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 9999;
-      background-color: black;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    @media (max-width: 768px) {
-      iframe {
-        height: 100vh;
-        width: 100vw;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="video-container">
-    <iframe
-      id="promoVideo"
-      src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
-  </div>
+  <div id="player"></div>
 
   <script>
-    // YouTube API setup
+    // Load YouTube Iframe API
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+    // Create the player
     var player;
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player('promoVideo', {
+      player = new YT.Player('player', {
+        videoId: 'eAuhLk4h6TA',
+        playerVars: {
+          autoplay: 1,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          mute: 1,
+          fs: 0
+        },
         events: {
-          'onStateChange': onPlayerStateChange
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange
         }
       });
     }
 
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+
     function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.ENDED) {
-        // Redirect after video ends
-        window.location.href = "https://www.canva.com/design/DAF3MUGCvRg/FnKTS5iS0UUnibEAcDFWQA/view?utm_content=DAF3MUGCvRg&utm_campaign=designshare&utm_medium=link&utm_source=editor";
+      // 0 = ended
+      if (event.data === 0) {
+        window.location.href = "https://virtualamoebacontact.my.canva.site/";
       }
     }
   </script>
