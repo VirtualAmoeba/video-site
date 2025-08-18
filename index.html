@@ -2,76 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Amoeba</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
+      background: black;
     }
-
-    #video-container {
-      width: 100%;
+    #video, #contact {
+      width: 100vw;
       height: 100vh;
-    }
-
-    #video-container iframe {
-      width: 100%;
-      height: 100%;
       border: none;
-    }
-
-    #canva-contact {
       display: none;
-      width: 100%;
-      height: 100vh;
-      border: none;
     }
-
-    @media (max-width: 768px) {
-      #canva-contact {
-        height: 100vh;
-      }
+    #video {
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <div id="video-container">
-    <iframe
-      id="intro-video"
-      src="https://www.youtube.com/embed/eAuhLk4h6TA?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&enablejsapi=1"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
-  </div>
+  <!-- YouTube video -->
+  <iframe id="video" src="https://www.youtube.com/embed/cPXtiPVJxzU?autoplay=1&controls=1&enablejsapi=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-  <iframe
-    id="canva-contact"
-    src="https://virtualamoebacontact.my.canva.site/"
-    allowfullscreen
-    loading="lazy"
-  ></iframe>
+  <!-- Contact page -->
+  <iframe id="contact" src="https://virtualamoebacontact.my.canva.site/"></iframe>
 
   <script>
+    // Load YouTube API
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player;
     function onYouTubeIframeAPIReady() {
-      const player = new YT.Player('intro-video', {
+      player = new YT.Player('video', {
         events: {
-          'onStateChange': function (event) {
-            if (event.data === YT.PlayerState.ENDED) {
-              document.getElementById('video-container').style.display = 'none';
-              document.getElementById('canva-contact').style.display = 'block';
-              window.scrollTo(0, 0);
-            }
-          }
+          'onStateChange': onPlayerStateChange
         }
       });
     }
 
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        document.getElementById('video').style.display = 'none';
+        document.getElementById('contact').style.display = 'block';
+      }
+    }
   </script>
 
 </body>
